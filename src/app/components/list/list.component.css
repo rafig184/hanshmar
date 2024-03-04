@@ -221,3 +221,26 @@
     background-color: #f3f046;
     /* Lighter green when hovered */
 }
+
+@media only screen and (max-width: 600px) {
+    .mainDiv {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .secondaryDiv {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .timePicker {
+        flex-direction: row;
+        gap: 45px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .input-container input {
+        width: 90%;
+    }
+}
