@@ -1,6 +1,9 @@
 {
   "name": "angular-client",
   "version": "0.0.0",
+  "engines": {
+    "node": "18.16"
+  },
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
