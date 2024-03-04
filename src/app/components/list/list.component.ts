@@ -1,0 +1,131 @@
+import { Component } from '@angular/core';
+import { ListService } from 'src/app/services/list.service';
+import { FormControl } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable'
+// import jsPDF from '@sagold/jsPDF';
+
+
+@Component({
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
+})
+export class ListComponent {
+
+
+  public startTime: Date = new Date();
+  public endTime: Date = new Date();
+  public amount: number
+  public hours: number
+  public isAdd: boolean
+  public inputs: any[] = [];
+  public timeOfShift: number = 0
+  public timeOfShiftFormatted: string
+  public formatedHours: string = ""
+
+
+  constructor(private listService: ListService, private datePipe: DatePipe) {
+    this.amount = 0
+    this.hours = 0
+    this.isAdd = false
+    this.timeOfShiftFormatted = ""
+  }
+
+
+
+  addNewAction() {
+    console.log("Start Time:", this.startTime);
+    console.log("End Time:", this.endTime);
+
+    if (this.startTime.getTime() === this.endTime.getTime()) {
+      alert("אנא בחר זמן סיום")
+      return
+    }
+
+    const timeDifference = this.endTime.getTime() - this.startTime.getTime();
+    // Convert milliseconds to hours
+    this.hours = timeDifference / (1000 * 60 * 60);
+    const fixedHours = this.hours - 2
+    if (this.hours < 0) {
+      this.hours = this.hours + 24
+      this.formatedHours = this.datePipe.transform(new Date(fixedHours * 3600000), 'HH:mm') || ''
+    } else {
+      this.formatedHours = this.datePipe.transform(new Date(fixedHours * 3600000), 'HH:mm') || ''
+    }
+    console.log(`hour: ${this.hours}`);
+    console.log(`hours: ${this.formatedHours}`);
+
+    // Ensure there's at least one guard to avoid division by zero
+    if (this.amount > 0) {
+      // Calculate the duration of each guard's shift
+      const timePerGuard = this.hours / this.amount;
+      this.timeOfShift = timePerGuard;
+
+      if (typeof this.timeOfShift === 'number' && !isNaN(this.timeOfShift)) {
+        // Format timeOfShift as a clock format
+        const fixedTimeOfShift = this.timeOfShift - 2
+        this.timeOfShiftFormatted = this.datePipe.transform(new Date(fixedTimeOfShift * 3600000), 'HH:mm') || '';
+      } else {
+        this.timeOfShiftFormatted = '';
+      }
+
+      console.log(timePerGuard);
+      console.log(this.timeOfShiftFormatted);
+      this.isAdd = true;
+
+      this.inputs = Array.from({ length: this.amount }, (_, index) => ({
+        id: index + 1,
+        value: '',
+        startTime: this.datePipe.transform(new Date(this.startTime.getTime() + index * timePerGuard * 3600000), 'HH:mm') || ''
+      }));
+      console.log(this.inputs);
+
+
+    } else {
+      alert('אנא בחר כמות שומרים');
+    }
+  }
+
+
+
+  exportToPDF() {
+    const doc = new jsPDF();
+
+    const formattedDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+
+    doc.setFontSize(18);
+    doc.setTextColor(0, 0, 255);
+    doc.text(`${formattedDate} - Guarding Shifts `, 10, 10);
+
+    const headers = ['Column 1', 'Column 2', 'Column 3'];
+    const data = this.inputs.map(input => [input.id, input.value, input.startTime]);
+
+    autoTable(doc, {
+      head: [['ID', 'Name', 'Shift time']],
+      body: data,
+    }
+    )
+    doc.save('table.pdf');
+  }
+
+  clearAll() {
+    this.isAdd = false
+    this.amount = 0
+    this.startTime = new Date()
+    this.endTime = new Date()
+  }
+
+
+  shuffleInputValues() {
+    for (let i = this.inputs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      // Swap the names (values) while keeping other properties intact
+      const temp = this.inputs[i].value;
+      this.inputs[i].value = this.inputs[j].value;
+      this.inputs[j].value = temp;
+    }
+  }
+
+}
