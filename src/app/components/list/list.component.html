@@ -4,19 +4,27 @@
 
             <div class="time">
                 <label class="pfont">: תחילת שמירה</label>
-                <ngx-mat-timepicker [(ngModel)]="startTime"></ngx-mat-timepicker>
+                <!-- <ngx-mat-timepicker [(ngModel)]="startTime"></ngx-mat-timepicker> -->
+                <div class="ngx-timepicker-field-example">
+                    <ngx-timepicker-field [(ngModel)]="startTime" [format]="24" [defaultTime]="'00:00'"
+                        [clockTheme]="customTheme"></ngx-timepicker-field>
+                </div>
+
             </div>
             <div class="time">
                 <label class="pfont">: סוף שמירה</label>
-                <ngx-mat-timepicker [(ngModel)]="endTime"></ngx-mat-timepicker>
+                <!-- <ngx-mat-timepicker [(ngModel)]="endTime"></ngx-mat-timepicker> -->
+                <div class="ngx-timepicker-field-example">
+                    <ngx-timepicker-field class="timepicker" [(ngModel)]="endTime" [format]="24" [defaultTime]="'00:00'"
+                        [clockTheme]="customTheme"></ngx-timepicker-field>
+                </div>
             </div>
-
         </div>
 
         <div class="amount">
             <mat-form-field class="example-full-width">
                 <mat-label>: כמות שומרים</mat-label>
-                <input min="0" type="number" [(ngModel)]="amount" matInput>
+                <input #input min="0" type="number" [(ngModel)]="amount" matInput (click)="selectInput(input)">
             </mat-form-field>
         </div>
 
@@ -30,8 +38,8 @@
 
     <div class="secondaryDiv" *ngIf="isAdd">
         <div class="details">
-            <p class="pfont1">{{this.formatedHours}}: כמות שעות לשמירה</p>
-            <p class="pfont2">{{this.timeOfShiftFormatted}}: זמן כל שמירה</p>
+            <p class="pfont1">{{this.formatedHours}}: סה"כ שעות לשמירה</p>
+            <p class="pfont2">{{this.timeOfShiftFormatted}}: משך כל שמירה</p>
         </div>
         <div class="btn2">
             <button (click)="exportToPDF()" mat-flat-button color="warn"><mat-icon>description</mat-icon>PDF ייצוא

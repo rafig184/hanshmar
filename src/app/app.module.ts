@@ -18,6 +18,8 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
 import { DatePipe } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,8 @@ import { MatDividerModule } from '@angular/material/divider';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    MatDividerModule
+    MatDividerModule,
+
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

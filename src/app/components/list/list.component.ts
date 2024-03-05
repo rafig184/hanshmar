@@ -4,7 +4,9 @@ import { FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable'
+import { NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
 // import jsPDF from '@sagold/jsPDF';
+// import { NgxMaterialTimepickerTheme } from '../../models/ngx-material-timepicker-theme.interface';
 
 
 @Component({
@@ -15,8 +17,8 @@ import autoTable from 'jspdf-autotable'
 export class ListComponent {
 
 
-  public startTime: Date = new Date();
-  public endTime: Date = new Date();
+  public startTime: string = "";
+  public endTime: string = "";
   public amount: number
   public hours: number
   public isAdd: boolean
@@ -26,6 +28,7 @@ export class ListComponent {
   public formatedHours: string = ""
 
 
+
   constructor(private listService: ListService, private datePipe: DatePipe) {
     this.amount = 0
     this.hours = 0
@@ -33,18 +36,36 @@ export class ListComponent {
     this.timeOfShiftFormatted = ""
   }
 
-
+  customTheme: NgxMaterialTimepickerTheme = {
+    dial: {
+      dialBackgroundColor: "#4CAF50"
+    },
+    container: {
+      bodyBackgroundColor: '#f0f0f0',
+      buttonColor: '#4CAF50'
+    },
+    clockFace: {
+      clockFaceBackgroundColor: '#ffffff',
+      clockHandColor: '#4CAF50',
+    }
+  };
 
   addNewAction() {
+
+    let now = new Date()
+    let nowDateTime = now.toISOString()
+    let nowDate = nowDateTime.split('T')[0];
+    let time = `${this.startTime}:00`
+    let time2 = `${this.endTime}:00`
+    const startTime = new Date(nowDate + 'T' + time);
+    const endTime = new Date(nowDate + 'T' + time2);
+
     console.log("Start Time:", this.startTime);
     console.log("End Time:", this.endTime);
 
-    if (this.startTime.getTime() === this.endTime.getTime()) {
-      alert("אנא בחר זמן סיום")
-      return
-    }
+    this.timevalidation()
 
-    const timeDifference = this.endTime.getTime() - this.startTime.getTime();
+    const timeDifference = endTime.getTime() - startTime.getTime();
     // Convert milliseconds to hours
     this.hours = timeDifference / (1000 * 60 * 60);
     const fixedHours = this.hours - 2
@@ -78,7 +99,7 @@ export class ListComponent {
       this.inputs = Array.from({ length: this.amount }, (_, index) => ({
         id: index + 1,
         value: '',
-        startTime: this.datePipe.transform(new Date(this.startTime.getTime() + index * timePerGuard * 3600000), 'HH:mm') || ''
+        startTime: this.datePipe.transform(new Date(startTime.getTime() + index * timePerGuard * 3600000), 'HH:mm') || ''
       }));
       console.log(this.inputs);
 
@@ -88,22 +109,42 @@ export class ListComponent {
     }
   }
 
+  timevalidation() {
+    if (this.startTime === "" && this.endTime === "") {
+      alert("אנא בחר זמנים לשמירה")
+      return
+    }
+
+    if (this.startTime === this.endTime) {
+      alert("אנא בחר זמן סיום")
+      return
+    }
+  }
 
 
   exportToPDF() {
     const doc = new jsPDF();
+    doc.addFont("assets/fonts/david.ttf", "David", "normal");
+    doc.addFont("assets/fonts/davidbd.ttf", "David", "bold");
+    doc.setFont("David", "normal");
 
     const formattedDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+    console.log(formattedDate);
 
+    const header = `רשימת שמירה ${formattedDate}`
+    console.log(header);
+
+    doc.setR2L(true);
     doc.setFontSize(18);
     doc.setTextColor(0, 0, 255);
-    doc.text(`${formattedDate} - Guarding Shifts `, 10, 10);
+    doc.text(header, 10, 10);
+    // doc.setR2L(true);
 
-    const headers = ['Column 1', 'Column 2', 'Column 3'];
     const data = this.inputs.map(input => [input.id, input.value, input.startTime]);
 
     autoTable(doc, {
-      head: [['ID', 'Name', 'Shift time']],
+      styles: { font: 'David' },
+      head: [['#', 'שם', 'זמן שמירה']],
       body: data,
     }
     )
@@ -113,8 +154,8 @@ export class ListComponent {
   clearAll() {
     this.isAdd = false
     this.amount = 0
-    this.startTime = new Date()
-    this.endTime = new Date()
+    this.startTime = "00:00"
+    this.endTime = "00:00"
   }
 
 
@@ -126,6 +167,11 @@ export class ListComponent {
       this.inputs[i].value = this.inputs[j].value;
       this.inputs[j].value = temp;
     }
+  }
+
+
+  selectInput(input: any) {
+    input.select()
   }
 
 }

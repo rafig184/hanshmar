@@ -1,14 +1,14 @@
 .timePicker {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 40px;
+    gap: 20px;
     margin-top: 2%;
     background-color: white;
     margin-left: 15%;
     margin-right: 15%;
-    margin-bottom: 2%;
+    margin-bottom: 10%;
     border-radius: 10px;
 }
 
@@ -195,7 +195,7 @@
 }
 
 .clearBtn {
-    background-color: #e9e501;
+    background-color: #dfdb00;
     /* Green */
     border: none;
     color: white;
@@ -222,6 +222,39 @@
     /* Lighter green when hovered */
 }
 
+/* .ngx-mat-timepicker-spacer {
+    display: flex;
+    align-items: start;
+} */
+.timepicker {
+
+    .timepicker__header {
+        background-color: #4CAF50 !important;
+    }
+
+    .clock-face__clock-hand {
+        background-color: #4CAF50 !important;
+
+        &::after {
+            background-color: #4CAF50 !important;
+        }
+
+        &::before {
+            border-color: #4CAF50 !important;
+        }
+    }
+
+    .clock-face__number {
+        >span.active {
+            background-color: #4CAF50 !important;
+        }
+    }
+
+    button:not(.timepicker-dial__item) {
+        color: #4CAF50 !important;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .mainDiv {
         margin-left: 5%;
@@ -234,7 +267,7 @@
     }
 
     .timePicker {
-        flex-direction: row;
+        flex-direction: column;
         gap: 45px;
         margin-left: 5%;
         margin-right: 5%;
