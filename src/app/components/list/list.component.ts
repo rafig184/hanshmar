@@ -134,13 +134,14 @@ export class ListComponent {
     const header = `רשימת שמירה ${formattedDate}`
     console.log(header);
 
+
     doc.setR2L(true);
     doc.setFontSize(18);
     doc.setTextColor(0, 0, 255);
     doc.text(header, 10, 10);
-    // doc.setR2L(true);
 
-    const data = this.inputs.map(input => [input.id, input.value, input.startTime]);
+
+    const data = this.inputs.map(input => [input.id, input.value, this.reverseText(input.startTime)]);
 
     autoTable(doc, {
       styles: { font: 'David' },
@@ -149,6 +150,10 @@ export class ListComponent {
     }
     )
     doc.save('table.pdf');
+  }
+
+  reverseText(text: string) {
+    return text.split('').reverse().join('');
   }
 
   clearAll() {
