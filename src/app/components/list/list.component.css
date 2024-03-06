@@ -32,8 +32,16 @@
 
 .amount {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    font-family: open;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 
 .btn {
