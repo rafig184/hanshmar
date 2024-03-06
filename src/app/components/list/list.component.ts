@@ -5,8 +5,8 @@ import { DatePipe } from '@angular/common';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable'
 import { NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
-// import jsPDF from '@sagold/jsPDF';
-// import { NgxMaterialTimepickerTheme } from '../../models/ngx-material-timepicker-theme.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -29,7 +29,7 @@ export class ListComponent {
 
 
 
-  constructor(private listService: ListService, private datePipe: DatePipe) {
+  constructor(private listService: ListService, private datePipe: DatePipe, private _snackBar: MatSnackBar) {
     this.amount = 0
     this.hours = 0
     this.isAdd = false
@@ -50,6 +50,7 @@ export class ListComponent {
     }
   };
 
+
   addNewAction() {
 
     let now = new Date()
@@ -63,7 +64,14 @@ export class ListComponent {
     console.log("Start Time:", this.startTime);
     console.log("End Time:", this.endTime);
 
-    this.timevalidation()
+    if (this.startTime === "" || this.endTime === "") {
+      this.openSnackBar("אנא בחר זמנים לשמירה", "OK")
+      return
+    }
+    if (this.startTime === this.endTime) {
+      this.openSnackBar("אנא בחר זמן סיום שונה מזמן ההתחלה", "OK")
+      return
+    }
 
     const timeDifference = endTime.getTime() - startTime.getTime();
     // Convert milliseconds to hours
@@ -105,21 +113,11 @@ export class ListComponent {
 
 
     } else {
-      alert('אנא בחר כמות שומרים');
+      this.openSnackBar('אנא בחר כמות שומרים', "OK")
     }
   }
 
-  timevalidation() {
-    if (this.startTime === "" && this.endTime === "") {
-      alert("אנא בחר זמנים לשמירה")
-      return
-    }
 
-    if (this.startTime === this.endTime) {
-      alert("אנא בחר זמן סיום")
-      return
-    }
-  }
 
 
   exportToPDF() {
@@ -177,6 +175,12 @@ export class ListComponent {
 
   selectInput(input: any) {
     input.select()
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 4000
+    });
   }
 
 }

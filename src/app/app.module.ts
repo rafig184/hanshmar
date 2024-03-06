@@ -17,7 +17,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { DatePipe } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -44,6 +44,8 @@ import { MatDividerModule } from '@angular/material/divider';
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
     MatDividerModule,
+    MatSnackBarModule
+
 
   ],
   providers: [DatePipe],

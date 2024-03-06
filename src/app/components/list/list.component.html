@@ -15,15 +15,15 @@
                 <label class="pfont">: סוף שמירה</label>
                 <!-- <ngx-mat-timepicker [(ngModel)]="endTime"></ngx-mat-timepicker> -->
                 <div class="ngx-timepicker-field-example">
-                    <ngx-timepicker-field class="timepicker" [(ngModel)]="endTime" [format]="24" [defaultTime]="'00:00'"
+                    <ngx-timepicker-field [(ngModel)]="endTime" [format]="24" [defaultTime]="'00:00'"
                         [clockTheme]="customTheme"></ngx-timepicker-field>
                 </div>
             </div>
         </div>
 
         <div class="amount">
+            <mat-label class="">: כמות שומרים</mat-label>
             <mat-form-field class="example-full-width">
-                <mat-label>: כמות שומרים</mat-label>
                 <input #input min="0" type="number" [(ngModel)]="amount" matInput (click)="selectInput(input)">
             </mat-form-field>
         </div>
