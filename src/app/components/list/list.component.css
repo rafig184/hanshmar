@@ -203,7 +203,7 @@
 }
 
 .clearBtn {
-    background-color: #dfdb00;
+    background-color: #df8600;
     /* Green */
     border: none;
     color: white;
@@ -226,7 +226,7 @@
 }
 
 .clearBtn:hover {
-    background-color: #f3f046;
+    background-color: #d7922b;
     /* Lighter green when hovered */
 }
 
