@@ -86,8 +86,13 @@ export class ListComponent {
     console.log(`hour: ${this.hours}`);
     console.log(`hours: ${this.formatedHours}`);
 
-    if (this.amount % 1 !== 0 || this.amount < 0 || this.amount > 60) {
+    if (this.amount % 1 !== 0 || this.amount < 0) {
       this.openSnackBar(" אנא בחר כמות שומרים תקינה ", "OK")
+      return;
+    }
+
+    if (this.amount > 60) {
+      this.openSnackBar("ניתן לבחור עד 60 שומרים", "OK")
       return;
     }
 
