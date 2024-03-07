@@ -87,7 +87,7 @@ export class ListComponent {
     console.log(`hours: ${this.formatedHours}`);
 
     if (this.amount % 1 !== 0 || this.amount < 0) {
-      this.openSnackBar(" אנא בחר כמות שומרים תקינה ", "OK")
+      this.openSnackBar(" אנא בחר כמות תקינה של שומרים ", "OK")
       return;
     }
 
