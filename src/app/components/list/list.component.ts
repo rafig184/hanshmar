@@ -52,7 +52,7 @@ export class ListComponent {
 
 
   addNewAction() {
-
+    this.isAdd = false;
     let now = new Date()
     let nowDateTime = now.toISOString()
     let nowDate = nowDateTime.split('T')[0];
@@ -86,7 +86,7 @@ export class ListComponent {
     console.log(`hour: ${this.hours}`);
     console.log(`hours: ${this.formatedHours}`);
 
-    if (this.amount % 1 !== 0 || this.amount < 0) {
+    if (this.amount % 1 !== 0 || this.amount < 0 || this.amount > 60) {
       this.openSnackBar(" אנא בחר כמות שומרים תקינה ", "OK")
       return;
     }
@@ -107,6 +107,7 @@ export class ListComponent {
 
       console.log(timePerGuard);
       console.log(this.timeOfShiftFormatted);
+
       this.isAdd = true;
 
       this.inputs = Array.from({ length: this.amount }, (_, index) => ({

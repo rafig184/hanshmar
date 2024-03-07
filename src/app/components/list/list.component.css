@@ -285,83 +285,30 @@
         width: 90%;
     }
 
-    /* .pfont {
-        font-family: open;
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        font-variation-settings:
-            "wdth" 100;
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .mainDiv {
+        margin-left: 30%;
+        margin-right: 30%;
     }
 
-    .pfont1 {
-        font-family: open;
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        font-variation-settings:
-            "wdth" 100;
+    .secondaryDiv {
+        margin-left: 30%;
+        margin-right: 30%;
     }
 
-    .pfont2 {
-        font-family: open;
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        font-variation-settings:
-            "wdth" 100;
+    .timePicker {
+        flex-direction: column;
+        gap: 45px;
+        margin-left: 5%;
+        margin-right: 5%;
     }
 
-    .amount {
-        font-family: open;
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        font-variation-settings:
-            "wdth" 100;
+    .input-container input {
+        width: 90%;
     }
 
-    .calcBtn {
-        font-family: open;
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        font-variation-settings:
-            "wdth" 100;
-    }
 
-    .clearBtn {
-        font-family: open;
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        font-variation-settings:
-            "wdth" 100;
-    }
-
-    .shuffleBtn {
-        font-family: open;
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        font-variation-settings:
-            "wdth" 100;
-    }
-
-    .pdfBtn {
-        font-family: open;
-        font-family: "Open Sans", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        font-variation-settings:
-            "wdth" 100;
-    } */
 }
