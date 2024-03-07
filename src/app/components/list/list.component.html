@@ -24,7 +24,8 @@
         <div class="amount">
             <mat-label>: כמות שומרים</mat-label>
             <mat-form-field class="example-full-width">
-                <input #input min="0" type="number" [(ngModel)]="amount" matInput (click)="selectInput(input)">
+                <input #input min="0" max="60" pattern="[0-9]*" type="number" [(ngModel)]="amount" matInput
+                    (click)="selectInput(input)">
             </mat-form-field>
         </div>
 

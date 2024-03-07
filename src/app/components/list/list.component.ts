@@ -86,6 +86,11 @@ export class ListComponent {
     console.log(`hour: ${this.hours}`);
     console.log(`hours: ${this.formatedHours}`);
 
+    if (this.amount % 1 !== 0 || this.amount < 0) {
+      this.openSnackBar(" אנא בחר כמות שומרים תקינה ", "OK")
+      return;
+    }
+
     // Ensure there's at least one guard to avoid division by zero
     if (this.amount > 0) {
       // Calculate the duration of each guard's shift

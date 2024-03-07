@@ -4,19 +4,32 @@
 
 
 html,
-body {
-    height: 100%;
+* {
+    font-family: 'Open Sans', 'sans-serif';
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 
 body {
+    height: 100%;
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    /* font-family: Roboto, "Helvetica Neue", sans-serif; */
     background-image: url('/assets/background3.jpg');
     background-size: cover;
     /* Adjusts the image size to cover the entire screen */
     background-repeat: repeat;
     /* Prevents the image from repeating */
     /* overflow: hidden; */
+
+    /* font-family: "Open Sans", sans-serif; */
+    /* font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100; */
 
 }
 
@@ -25,4 +38,16 @@ body {
     /* This will remove the scrollbar */
     background: transparent;
     /* Make scrollbar transparent */
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-family: open;
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+    }
 }
