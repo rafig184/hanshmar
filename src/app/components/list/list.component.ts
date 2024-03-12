@@ -52,7 +52,6 @@ export class ListComponent {
 
 
   addNewAction() {
-    const timeRegex = /^\d+$/;
     this.isAdd = false;
     let now = new Date()
     let nowDateTime = now.toISOString()
@@ -65,10 +64,6 @@ export class ListComponent {
     console.log("Start Time:", this.startTime);
     console.log("End Time:", this.endTime);
 
-    if (!timeRegex.test(this.startTime) || !timeRegex.test(this.endTime)) {
-      this.openSnackBar("הזמנים חייבים להכיל רק מספרים", "OK");
-      return;
-    }
 
     if (this.startTime === "" || this.endTime === "") {
       this.openSnackBar("אנא בחר זמנים לשמירה", "OK")
