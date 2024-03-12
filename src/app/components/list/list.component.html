@@ -6,7 +6,7 @@
                 <label class="pfont">: תחילת שמירה</label>
                 <div class="ngx-timepicker-field-example">
                     <ngx-timepicker-field [(ngModel)]="startTime" [format]="24" [defaultTime]="'00:00'"
-                        [clockTheme]="customTheme" inputmode="numeric" pattern="[0-9]*"></ngx-timepicker-field>
+                        [clockTheme]="customTheme" inputmode="numeric" pattern="\d*" type="tel"></ngx-timepicker-field>
                 </div>
 
             </div>
@@ -14,7 +14,7 @@
                 <label class="pfont">: סוף שמירה</label>
                 <div class="ngx-timepicker-field-example">
                     <ngx-timepicker-field [(ngModel)]="endTime" [format]="24" [defaultTime]="'00:00'"
-                        [clockTheme]="customTheme" inputmode="numeric" pattern="[0-9]*"></ngx-timepicker-field>
+                        [clockTheme]="customTheme" inputmode="numeric" pattern="\d*" type="tel"></ngx-timepicker-field>
                 </div>
             </div>
         </div>
